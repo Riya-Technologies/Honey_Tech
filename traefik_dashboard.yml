@@ -1,0 +1,15 @@
+# kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+# Accessible with the url: http://traefik.localhost/dashboard/
+# kubectl expose deploy traefik --name trafeik-web --port=9000 --type=NodePort
+# https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-web-ui
+spec:
+  ports:
+  - port: 80
+    targetPort: 9000
+  selector:
+    app.kubernetes.io/name: traefik
